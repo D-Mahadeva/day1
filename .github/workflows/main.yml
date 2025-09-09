@@ -1,25 +1,24 @@
-name: CICDDEMO
+name: Deploy to Production
 
 on:
   push:
-    branches: [ "main" ]
+    branches:
+      - main
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    environment: production
-    permissions:
-      contents: write
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          token: ${{ secrets.GITHUB_TOKEN }}
 
-      - run: |
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Git
+        run: |
           git config user.name "${GITHUB_ACTOR}"
           git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
-          git fetch origin
+
+      - name: Push to production branch
+        run: |
           git checkout -B production
-          git reset --hard origin/main
-          git push origin production --force
+          git push origin HEAD:production --force
