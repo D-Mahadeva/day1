@@ -1,1 +1,1 @@
-print("hi mahadeva hello")
+print("1.mahadeva hello")
