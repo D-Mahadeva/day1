@@ -20,8 +20,8 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt   # 👈 installs Flask and other libs
 
-      - name: Run unit tests (test_app.py)
-        run: python -m unittest -v app.py
+      - name: Run unit tests (test.py)
+        run: python -m unittest -v maha.py
 
   deploy:
     needs: test
